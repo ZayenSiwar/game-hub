@@ -3,5 +3,5 @@ const config :ThemeConfig={
     initialColorMode:'dark'
 
 };
-const Theme =  extendTheme({config});
+const Theme =  extendTheme({config})
 export default Theme; 
