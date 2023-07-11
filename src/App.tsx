@@ -5,11 +5,15 @@ import GenreList from './components/GenreList'
 import { useState } from 'react'
 import { Genre } from './hooks/useGenres'
 import PlatformSelected from './components/PlatformSelected'
+import { Platform } from './hooks/useGames'
 
 function App() {
+  const[selectedPlatform,setSelectedPlatform]= useState<Platform |null>(null);
+
   const[selectedGenre,setSelectedGenre]=useState<Genre | null>(null);
   return <Grid templateAreas={{base:`"nav " " main"`,
   lg :`"nav nav" "aside main"`}}
+  
    
    templateColumns={{
     base:'1fr',
@@ -24,8 +28,8 @@ function App() {
     </GridItem>
     </Show>
     <GridItem area='main' >
-      <PlatformSelected/>  
-      <GameGrid selectedGenre={selectedGenre}/>
+      <PlatformSelected selectedPlatform={selectedPlatform} onSelectPlatform={(platform) =>(setSelectedPlatform(platform))}/>  
+      <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
     </GridItem>
   </Grid>
 }
