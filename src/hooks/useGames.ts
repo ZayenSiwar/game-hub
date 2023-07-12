@@ -22,5 +22,10 @@ const useGames=(gameQuery:GameQuery)=>
     useData<Game>('/games',{params:{
         genres:gameQuery.genre?.id,
          platforms: gameQuery.platform?.id ,
-          ordering : gameQuery.SortOrder}},[gameQuery]);
+          ordering : gameQuery.SortOrder,
+        serach : gameQuery.searchText,
+        }
+        
+        },[gameQuery]);
+
 export default useGames;
