@@ -1,33 +1,37 @@
-import { Button, Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import React from 'react'
-import { BsChevronDown } from 'react-icons/bs'
-import { MenuItem } from '@chakra-ui/react'
-interface Props{
-    onSelectSortOrder:(SortOrders:string)=> void; 
-    SortOrder:string;
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { BsChevronDown } from "react-icons/bs";
+
+interface Props {
+  onSelectSortOrder: (sortOrder: string) => void;
+  sortOrder: string;
 }
-const SortSelector = ({onSelectSortOrder ,SortOrder}:Props) => {
-    const SortOrders=[
-        {value:'',label:'Relevance'},
-        {value:'-added',label:'Date added'},
-        {value:'name',label:'name'},
-        {value:'-release',label:'Release date'},
-        {value:'-metacritic',label:'popularity'},
-        {value:'-rating',label:'Average Rating'},
-    ]
-    const curresntSortOreder= SortOrders.find(order => order.value === SortOrder)
+
+const SortSelector = ({ onSelectSortOrder, sortOrder }: Props) => {
+  const sortOrders = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average rating" },
+  ];
+
+  const currentSortOrder = sortOrders.find(order => order.value === sortOrder);
+
   return (
     <Menu>
-    <MenuButton as={Button} rightIcon={<BsChevronDown/>}>
-   order by : {curresntSortOreder?.label || 'relevance'}
-    </MenuButton>
-    <MenuList>
-  {SortOrders.map(order=><MenuItem onClick={() => onSelectSortOrder(order.value)} key={order.value} value={order.value}>{order.label}</MenuItem>)}
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        Order by: {currentSortOrder?.label || 'Relevance'}
+      </MenuButton>
+      <MenuList>
+        {sortOrders.map((order) => (
+          <MenuItem onClick={() => onSelectSortOrder(order.value)} key={order.value} value={order.value}>
+            {order.label}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
+  );
+};
 
-    </MenuList>
-  </Menu>
-
-  )
-}
-
-export default SortSelector
+export default SortSelector;
