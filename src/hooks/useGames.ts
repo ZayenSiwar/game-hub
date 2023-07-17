@@ -3,7 +3,9 @@ import { GameQuery } from "../App";
 import { FetchResponse } from "../services/api-client";
 
 import { Genre } from "./useGenres";
-import apiClient from "../services/api-client";
+import APICLIENT from "../services/api-client";
+
+const apiClient= new APICLIENT<Game>('/games');
 
 export interface Platform {
   id: number;
@@ -24,14 +26,15 @@ const useGames = (gameQuery: GameQuery) =>
 
 useQuery<FetchResponse<Game>,Error>({
   queryKey: ['games',gameQuery],
-  queryFn: () => apiClient.get<FetchResponse<Game>>('/games',{
+  queryFn: () => apiClient.getAll({ 
     params: {
       genres: gameQuery.genre?.id,
       parent_platforms: gameQuery.platform?.id,
       ordering: gameQuery.sortOrder,
       search: gameQuery.searchText
     },
-  }).then((res) => res.data),
+  })
+ 
 
 })
 
