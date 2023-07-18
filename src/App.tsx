@@ -12,7 +12,7 @@ import { Genre } from "./hooks/useGenres";
 
 export interface GameQuery { 
   genreId?: number;
-  platformId?:number;;
+  platformId?:number;
   sortOrder: string;
   searchText: string;
 }
